@@ -1,0 +1,43 @@
+repos:
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.10.9
+    hooks:
+      - id: uv-lock
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.5
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.19.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [ types-setuptools ]
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.17
+    hooks:
+      - id: mdformat
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-frontmatter
+  - repo: local
+    hooks:
+      - id: jinja2-type-gen-example-typical
+        name: generate signatures (typical example)
+        entry: uv run jinja2-type-gen generate examples/typical/src/typical_example/templates --output examples/typical/src/typical_example/templates.pyi
+        language: system
+        pass_filenames: false
+        types_or: [html, xml, yaml, markdown, text]
+      - id: jinja2-type-gen-example-tutorial
+        name: generate signatures (tutorial example)
+        entry: uv run jinja2-type-gen generate examples/tutorial/src/tutorial/templates --create-renderers --output examples/tutorial/src/tutorial/templates/__init__.py
+        language: system
+        pass_filenames: false
+        types_or: [html, xml, yaml, markdown, text]

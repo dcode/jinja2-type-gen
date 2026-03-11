@@ -1,0 +1,18 @@
+[project]
+name = "tutorial"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Derek Ditch", email = "dcode@users.noreply.github.com" }]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+tutorial = "tutorial:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+jinja2-type-gen = { workspace = true }

@@ -1,0 +1,10 @@
+{% signature title:str, things: list[str], now: pydantic.AwareDatetime %}
+# {{ title }}
+
+This is a list of things:
+
+{% for item in things -%}
+- {{ item }}
+{% endfor %}
+
+The given time is {{ now.strtime("%c")}}.

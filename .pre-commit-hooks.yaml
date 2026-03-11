@@ -1,0 +1,7 @@
+- id: jinja2-type-gen
+  name: Jinja2 Type Signature Generator
+  description: Automatically generate templates.pyi from jinja2 signature meta-tags.
+  entry: jinja2-type-gen generate
+  language: python
+  types_or: [html, xml, yaml, markdown, text]
+  pass_filenames: false

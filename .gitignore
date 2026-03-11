@@ -1,0 +1,21 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Documentation output
+site/
+
+# cache things
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.uv_cache/
+.coverage

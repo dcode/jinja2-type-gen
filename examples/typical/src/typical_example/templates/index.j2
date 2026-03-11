@@ -1,0 +1,23 @@
+{% extends "base.j2" %}
+
+{% signature
+    title: str,
+    items: list[str],
+    theme: Literal["light", "blue"] = "light"
+%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items found.</p>
+    {% endif %}
+{% endblock %}

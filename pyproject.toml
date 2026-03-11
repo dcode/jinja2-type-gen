@@ -1,0 +1,49 @@
+[project]
+name = "jinja2-type-gen"
+version = "0.1.0"
+description = "Generate Python type signatures from Jinja2 templates."
+readme = "README.md"
+authors = [{ name = "Derek Ditch", email = "dcode@users.noreply.github.com" }]
+license = { text = "BSD-3-Clause" }
+requires-python = ">=3.14"
+dependencies = ["jinja2>=3.1.6"]
+keywords = ["jinja2", "typing", "typeddict", "code generation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Text Processing :: Markup",
+]
+
+[project.urls]
+Homepage = "https://github.com/dcode/jinja2-type-gen"
+Repository = "https://github.com/dcode/jinja2-type-gen"
+"Issue Tracker" = "https://github.com/dcode/jinja2-type-gen/issues"
+
+[project.scripts]
+jinja2-type-gen = "jinja2_type_gen:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "python-semantic-release>=10.5.3",
+    "ruff>=0.15.5",
+]
+
+docs = ["zensical"]
+
+[tool.uv.workspace]
+members = ["examples/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "examples"]

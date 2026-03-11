@@ -1,0 +1,1 @@
+C:/Users/admin/.gemini/antigravity/playground/jinja2-signatures/ARCHITECTURE.md
