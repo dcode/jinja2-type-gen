@@ -74,5 +74,9 @@ omit = ["examples/*", "tests/*", "docs/*", ".venv/*"]
 version_variable = "src/jinja2_type_gen/__init__.py:__version__"
 build_command = "uv build"
 
+[tool.semantic_release.publish]
+upload_to_vcs_release = true
+upload_to_repository = false
+
 [tool.semantic_release.branches.main]
 match = "main"

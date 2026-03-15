@@ -31,7 +31,7 @@ Create a file named `templates/index.j2` with the following content:
 </ul>
 ```
 
-> \[!NOTE\]
+> [!NOTE]
 > The `{% signature %}` block is purely metadata. At runtime, the `SignatureExtension` compiles this tag down to a zero-cost empty node, meaning it adds **no overhead** to your application's rendering pipeline.
 
 ______________________________________________________________________
