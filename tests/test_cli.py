@@ -17,9 +17,9 @@ def test_cli_generate_creates_stub_file(tmp_path: Path):
     # Run CLI generate command
     result = main(["generate", str(template_dir), "--output", str(output_file)])
 
-    assert (
-        result == 1
-    ), "CLI should exit with code 1 when the file is freshly generated or modified"
+    assert result == 1, (
+        "CLI should exit with code 1 when the file is freshly generated or modified"
+    )
     assert output_file.exists(), "The output stub file must be generated"
 
     # Run it again to ensure it exits with 0
@@ -42,7 +42,13 @@ def test_cli_generate_creates_renderers(tmp_path: Path):
     output_file = tmp_path / "templates.py"
 
     result = main(
-        ["generate", str(template_dir), "--output", str(output_file), "--create-renderers"]
+        [
+            "generate",
+            str(template_dir),
+            "--output",
+            str(output_file),
+            "--create-renderers",
+        ]
     )
     assert result == 1
     content = output_file.read_text()
@@ -103,6 +109,7 @@ def test_cli_handles_any_type(tmp_path: Path):
 
 def test_cli_no_args_exits_error():
     import pytest
+
     with pytest.raises(SystemExit):
         main([])
 

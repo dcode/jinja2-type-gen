@@ -71,9 +71,9 @@ def test_analyzer_ignores_macro_scope():
 
     assert "global_arg" in types
     assert types["global_arg"]["type"] == "str"
-    assert (
-        "macro_arg" not in types
-    ), "Macro signatures should not leak into global template scope."
+    assert "macro_arg" not in types, (
+        "Macro signatures should not leak into global template scope."
+    )
 
 
 def test_analyzer_resolves_extends():
@@ -95,9 +95,9 @@ def test_analyzer_resolves_extends():
 
     assert "child_param" in types
     assert types["child_param"]["type"] == "int"
-    assert (
-        "base_title" in types
-    ), "Signature from extended template should be bubbled up."
+    assert "base_title" in types, (
+        "Signature from extended template should be bubbled up."
+    )
     assert types["base_title"]["type"] == "str"
 
 
@@ -120,7 +120,9 @@ def test_analyzer_resolves_include():
 
     assert "main_data" in types
     assert types["main_data"]["type"] == "str"
-    assert "partial_data" in types, "Signature from included template should be bubbled up."
+    assert "partial_data" in types, (
+        "Signature from included template should be bubbled up."
+    )
     assert types["partial_data"]["type"] == "dict[str, Any]"
 
 
