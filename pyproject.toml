@@ -1,7 +1,7 @@
 [project]
 name = "jinja2-type-gen"
 dynamic = ["version"]
-description = "Generate Python type signatures from Jinja2 templates."
+description = "Strict, compile-time/static type safety for Jinja2 templates without compromising runtime performance."
 readme = "README.md"
 authors = [{ name = "Derek Ditch", email = "dcode@users.noreply.github.com" }]
 license = { text = "BSD-3-Clause" }
@@ -36,6 +36,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "hatch>=1.16.5",
     "mypy>=1.19.1",
     "pre-commit>=4.5.1",
     "pytest>=9.0.2",
