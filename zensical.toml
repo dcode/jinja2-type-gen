@@ -337,3 +337,6 @@ linenums_style = "pymdownx-inline"
 [project.markdown_extensions.pymdownx.inlinehilite]
 
 [project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.pymdownx.snippets]
+base_path = "."
