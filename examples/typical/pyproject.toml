@@ -3,7 +3,7 @@ name = "typical-example"
 version = "0.1.0"
 description = "A typical workspace example using jinja2-type-gen"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.10"
 dependencies = [
     "jinja2-type-gen",
     "jinja2>=3.1.6"

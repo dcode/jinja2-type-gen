@@ -9,7 +9,7 @@ Safety & Efficiency Audit:
 from __future__ import annotations
 
 import ast
-from typing import Any
+from typing import Any, TypeAlias
 
 from jinja2 import Environment
 from jinja2.sandbox import ImmutableSandboxedEnvironment
@@ -17,9 +17,9 @@ from jinja2 import nodes
 
 from .extension import SignatureExtension
 
-# PEP 695 type aliases
-type ArgDef = dict[str, Any]
-type ExtractedArgs = dict[str, ArgDef]
+# Use TypeAlias for 3.10 compatibility
+ArgDef: TypeAlias = dict[str, Any]
+ExtractedArgs: TypeAlias = dict[str, ArgDef]
 
 
 def extract_types_from_signature(raw_sig: str) -> ExtractedArgs:

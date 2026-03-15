@@ -29,6 +29,6 @@ Hello {% signature user: str, 123 invalid %}World!
 
     with (
         pytest.raises(TemplateSyntaxError, match="Invalid python signature syntax"),
-        pytest.warns(SyntaxWarning, match="invalid decimal literal"),
+        pytest.warns((SyntaxWarning, DeprecationWarning), match="invalid decimal literal"),
     ):
         env.from_string(template_source)

@@ -22,9 +22,7 @@ def test_concurrent_analysis():
     ]
 
     async def _run():
-        async with asyncio.TaskGroup() as tg:
-            tasks = [tg.create_task(analyze_template(analyzer, t)) for t in templates]
-        return [task.result() for task in tasks]
+        return await asyncio.gather(*(analyze_template(analyzer, t) for t in templates))
 
     results = asyncio.run(_run())
 

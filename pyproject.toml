@@ -5,7 +5,7 @@ description = "Generate Python type signatures from Jinja2 templates."
 readme = "README.md"
 authors = [{ name = "Derek Ditch", email = "dcode@users.noreply.github.com" }]
 license = { text = "BSD-3-Clause" }
-requires-python = ">=3.14"
+requires-python = ">=3.10"
 dependencies = ["jinja2>=3.1.6"]
 keywords = ["jinja2", "typing", "typeddict", "code generation"]
 classifiers = [
@@ -13,6 +13,10 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Code Generators",
     "Topic :: Text Processing :: Markup",
@@ -41,6 +45,18 @@ dev = [
 ]
 
 docs = ["zensical"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "pytest",
+    "pytest-cov",
+]
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.12", "3.14"]
+
+[tool.hatch.envs.test]
+scripts = { test = "pytest {args:tests}" }
 
 [tool.uv.workspace]
 members = ["examples/*"]
