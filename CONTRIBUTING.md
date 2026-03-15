@@ -33,4 +33,16 @@ The `SignatureExtension` does *not* create a custom AST node because doing so ca
 - All new functionality must be accompanied by comprehensive `pytest` cases. Include "unhappy paths", such as malformed syntax or deep nesting.
 - When adding complex algorithms, document the time complexity ($O(n)$) and space complexity in the docstring.
 
+## Releasing New Versions
+
+This project uses `python-semantic-release` to automate versioning and PyPI publication.
+
+1. Ensure all changes are committed and follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+1. When a PR is merged into `main`, the CI workflow will automatically trigger `semantic-release`.
+1. To test a release locally:
+   ```bash
+   uv run semantic-release version --noop
+   ```
+1. If everything looks correct, the GitHub Action will handle tagging, building, and publishing to PyPI.
+
 Thank you for helping us maintain a safe, high-performance static analyzer.

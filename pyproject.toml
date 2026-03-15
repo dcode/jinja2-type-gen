@@ -1,6 +1,6 @@
 [project]
 name = "jinja2-type-gen"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Generate Python type signatures from Jinja2 templates."
 readme = "README.md"
 authors = [{ name = "Derek Ditch", email = "dcode@users.noreply.github.com" }]
@@ -45,5 +45,15 @@ docs = ["zensical"]
 [tool.uv.workspace]
 members = ["examples/*"]
 
+[tool.hatch.version]
+path = "src/jinja2_type_gen/__init__.py"
+
 [tool.pytest.ini_options]
 testpaths = ["tests", "examples"]
+
+[tool.semantic_release]
+version_variable = "src/jinja2_type_gen/__init__.py:__version__"
+build_command = "uv build"
+
+[tool.semantic_release.branches.main]
+match = "main"

@@ -29,16 +29,16 @@ pip install jinja2-type-gen
 
 ### Command-Line Interface
 
-Analyze a template and output the `TypedDict` to `stdout`:
+Analyze a directory of templates and generate type stubs:
 
 ```bash
-jinja2-type-gen my_template.j2
+jinja2-type-gen generate ./src/templates/ --output ./src/templates.pyi
 ```
 
 Generate type stubs along with helper rendering functions:
 
 ```bash
-jinja2-type-gen generate my_template.j2 --output ./generated_stubs/
+jinja2-type-gen generate ./src/templates/ --output ./src/templates/__init__.py --create-renderers
 ```
 
 ### Pre-commit Hook
@@ -51,6 +51,7 @@ repos:
     rev: v0.1.0 # Use the latest version
     hooks:
       - id: jinja2-type-gen
+        args: ["./src/templates/", "--output", "./src/templates.pyi"]
 ```
 
 ## Performance & Safety Audit
