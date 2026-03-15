@@ -120,7 +120,72 @@ def test_analyzer_resolves_include():
 
     assert "main_data" in types
     assert types["main_data"]["type"] == "str"
-    assert (
-        "partial_data" in types
-    ), "Signature from included template should be bubbled up."
+    assert "partial_data" in types, "Signature from included template should be bubbled up."
     assert types["partial_data"]["type"] == "dict[str, Any]"
+
+
+def test_analyzer_handles_memoryview():
+    analyzer = TemplateTypeAnalyzer()
+    template_source = "{% signature user: str %}"
+    # Convert to memoryview
+    mv_source = memoryview(template_source.encode("utf-8"))
+
+    types = analyzer.analyze_source(mv_source)
+    assert "user" in types
+    assert types["user"]["type"] == "str"
+
+
+def test_analyzer_handles_circular_include():
+    from jinja2 import Environment, DictLoader
+    from jinja2_type_gen import SignatureExtension
+
+    # A -> B -> A
+    env = Environment(
+        loader=DictLoader(
+            {
+                "a.j2": "{% signature a: int %}{% include 'b.j2' %}",
+                "b.j2": "{% signature b: int %}{% include 'a.j2' %}",
+            }
+        ),
+        extensions=[SignatureExtension],
+    )
+    analyzer = TemplateTypeAnalyzer(env=env)
+
+    # This should not hang or crash
+    types = analyzer.analyze_source(env.loader.get_source(env, "a.j2")[0])
+
+    assert "a" in types
+    assert "b" in types
+
+
+def test_analyzer_ignores_dynamic_extends_and_include():
+    from jinja2 import Environment, DictLoader
+    from jinja2_type_gen import SignatureExtension
+
+    env = Environment(
+        loader=DictLoader(
+            {
+                "base.j2": "{% signature base_val: int %}",
+                "main.j2": "{% extends base_name %}{% include some_partial %}",
+            }
+        ),
+        extensions=[SignatureExtension],
+    )
+    analyzer = TemplateTypeAnalyzer(env=env)
+
+    # Should not fail, just ignores the dynamic ones since we can't resolve them statically easily here
+    types = analyzer.analyze_source(env.loader.get_source(env, "main.j2")[0])
+    assert len(types) == 0
+
+
+def test_extract_types_kwonly_and_defaults():
+    from jinja2_type_gen.analyzer import extract_types_from_signature
+
+    # Test kwonly args and defaults in regular args
+    sig = "a: int, b: str = 'default', *, c: bool, d: float = 1.0"
+    types = extract_types_from_signature(sig)
+
+    assert types["a"]["required"] is True
+    assert types["b"]["required"] is False
+    assert types["c"]["required"] is True
+    assert types["d"]["required"] is False

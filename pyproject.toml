@@ -47,10 +47,7 @@ dev = [
 docs = ["zensical"]
 
 [tool.hatch.envs.default]
-dependencies = [
-    "pytest",
-    "pytest-cov",
-]
+dependencies = ["pytest", "pytest-cov"]
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.10", "3.12", "3.14"]
@@ -66,6 +63,11 @@ path = "src/jinja2_type_gen/__init__.py"
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "examples"]
+
+[tool.coverage.run]
+branch = true
+source = ["."]                                        # Optional: specify the source root
+omit = ["examples/*", "tests/*", "docs/*", ".venv/*"]
 
 [tool.semantic_release]
 version_variable = "src/jinja2_type_gen/__init__.py:__version__"
