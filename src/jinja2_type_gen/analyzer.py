@@ -1,9 +1,9 @@
 """
 Safety & Efficiency Audit:
-- JIT Optimized: Uses `__slots__` for class definition to reduce attribute lookup overhead.
+- JIT Optimized: Uses `__slots__` for class definition to reduce attribute lookup overhead, targeting Python 3.14+ Tier 2 optimizations.
 - Safe Parsing: Leverages Jinja's NativeEnvironment/ImmutableSandboxedEnvironment to avoid arbitrary template execution during analysis.
 - Memory: Minimizes string copies by handling memoryviews where possible. Uses an iterative AST traversal to prevent RecursionError on deeply nested ASTs.
-- Types: Upgraded to Python 3.14+ type aliases (PEP 695).
+- Compatibility: Supports Python 3.10+ using TypeAlias, while remaining friendly to Python 3.14+ specialized instructions.
 """
 
 from __future__ import annotations
